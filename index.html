@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Particles Demo</title>
+  <meta charset="UTF-8">
+  <title>Particles Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow-x: hidden;
+    }
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .content {
+      color: white;
+      font-family: sans-serif;
+      padding: 200vh 2rem 2rem;
+      font-size: 2rem;
+    }
+  </style>
 </head>
-<body style="background: black; color: white; text-align: center;">
-  <h1>Hello from GitHub Pages 🎉</h1>
-  <p>Once you upload your .mp4 and update the code, it'll show here!</p>
+<body>
+  <video id="particles" autoplay muted playsinline loop>
+    <source src="Comp 1.mp4" type="video/mp4" />
+  </video>
+
+  <div class="content">
+    Scroll down and see what happens 🌬️
+  </div>
+
+  <script>
+    let lastScrollY = window.scrollY;
+    const video = document.getElementById("particles");
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      const scrollSpeed = Math.abs(currentScrollY - lastScrollY);
+
+      video.playbackRate = scrollSpeed > 1 ? 1 : 0; // 滚动才播放
+      lastScrollY = currentScrollY;
+    });
+  </script>
 </body>
 </html>
